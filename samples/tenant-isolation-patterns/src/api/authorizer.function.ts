@@ -42,7 +42,7 @@ export const handler = async (event: APIGatewayRequestAuthorizerEvent): Promise<
     };
     const command = new AssumeRoleWithWebIdentityCommand(input);
     const credentials = await stsClient.send(command);
-    console.log(credentials);
+    // Don't do this in prod: console.log(credentials);
 
     const context = {
       tenantId: tenantId,
@@ -50,7 +50,7 @@ export const handler = async (event: APIGatewayRequestAuthorizerEvent): Promise<
       secretAccessKey: credentials.Credentials?.SecretAccessKey,
       sessionToken: credentials.Credentials?.SessionToken,
     };
-    console.log('Context: ', JSON.stringify(context));
+    // Don't do this in prod: console.log('Context: ', JSON.stringify(context));
 
     const arn = event.methodArn.split('/');
 
